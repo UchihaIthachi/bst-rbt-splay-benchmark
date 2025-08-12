@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: write # allow commits/pushes with GITHUB_TOKEN
+  contents: write
 
 jobs:
   build-and-benchmark:
@@ -15,22 +15,24 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # Option A: use preinstalled compilers (Ubuntu has gcc/g++/make)
-      # - name: Show compiler versions
-      #   run: |
-      #     g++ --version
-      #     make --version
+      # Optional cache: apt packages (C++ toolchain)
+      - name: Cache APT packages
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt
+          key: apt-cache-${{ runner.os }}
 
-      # Option B (safe): install build tools explicitly
       - name: Install C++ toolchain
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential
 
+      # Cache Python packages
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
+          cache: "pip"
 
       - name: Install Python dependencies
         run: |
@@ -52,4 +54,3 @@ jobs:
             git push
           else
             echo "No changes to commit."
-          fi
