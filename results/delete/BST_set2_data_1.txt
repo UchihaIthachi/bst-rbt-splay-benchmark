@@ -1,1 +1,1 @@
-delete_time_us,3
+delete_time_us,500

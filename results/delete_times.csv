@@ -1,7 +1,7 @@
 Data set,Basic BST,RB-Tree,Splay Tree
-set1/data_1,0,0,0
-set1/data_2,0,0,0
-set1/data_3,0,1,0
-set2/data_1,3,0,0
-set2/data_2,6,0,0
-set2/data_3,14,0,0
+set1/data_1,3,6,1
+set1/data_2,4,6,1
+set1/data_3,3,8,2
+set2/data_1,500,5,0
+set2/data_2,950,6,0
+set2/data_3,2686,6,0

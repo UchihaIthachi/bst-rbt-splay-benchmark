@@ -1,2 +1,2 @@
-time_us,4491
-height,18
+time_us,70375
+height,23
