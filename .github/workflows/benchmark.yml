@@ -2,8 +2,10 @@ name: Run Benchmarks and Commit Results
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+
+permissions:
+  contents: write # allow commits/pushes with GITHUB_TOKEN
 
 jobs:
   build-and-benchmark:
@@ -11,15 +13,22 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Set up C++ environment
-        uses: ammaraskar/setup-cpp@v3
-        with:
-          compiler: g++
+      # Option A: use preinstalled compilers (Ubuntu has gcc/g++/make)
+      # - name: Show compiler versions
+      #   run: |
+      #     g++ --version
+      #     make --version
+
+      # Option B (safe): install build tools explicitly
+      - name: Install C++ toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
@@ -33,15 +42,12 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add results/
-          # Check if there are any changes to commit
           if ! git diff --staged --quiet; then
             git commit -m "Update benchmark results and plots"
             git push
           else
             echo "No changes to commit."
           fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
