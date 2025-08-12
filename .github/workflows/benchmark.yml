@@ -38,7 +38,9 @@ jobs:
           pip install pandas matplotlib
 
       - name: Run full pipeline
-        run: make run
+        run: |
+          chmod +x script/run_benchmarks.sh
+          make run
 
       - name: Commit and push changes
         run: |
