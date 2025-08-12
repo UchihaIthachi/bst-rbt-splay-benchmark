@@ -1,7 +1,7 @@
 Data set,Basic BST,RB-Tree,Splay Tree
-set1/data_1,719,813,699
-set1/data_2,1711,1828,1594
-set1/data_3,4411,4644,3921
-set2/data_1,25261,618,252
-set2/data_2,107118,1344,495
-set2/data_3,393727,2895,1099
+set1/data_1,719,821,732
+set1/data_2,1631,1897,1612
+set1/data_3,4120,4491,3969
+set2/data_1,22112,615,238
+set2/data_2,100731,1296,509
+set2/data_3,424839,2865,1069
