@@ -14,9 +14,17 @@ void read_data(const std::string& filename, std::vector<long long>& data) {
     std::string line;
     while (std::getline(file, line)) {
         std::stringstream ss(line);
-        long long value;
-        if (ss >> value) {
-            data.push_back(value);
+        std::string value;
+        while (std::getline(ss, value, ',')) {
+            if (!value.empty()) {
+                try {
+                    data.push_back(std::stoll(value));
+                } catch (const std::invalid_argument& e) {
+                    // Ignore invalid numbers
+                } catch (const std::out_of_range& e) {
+                    // Ignore numbers out of range
+                }
+            }
         }
     }
 }
