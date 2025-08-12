@@ -1,2 +1,0 @@
-time_us,247
-height,2179
