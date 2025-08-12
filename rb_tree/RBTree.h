@@ -3,6 +3,23 @@
 
 struct RBTree {
 public:
+    enum class Color {
+        red,
+        black
+    };
+
+    struct Node {
+        int key;
+        int val;
+        Color col;
+        size_t size;
+        Node* left;
+        Node* right;
+
+        Node(int key, int val, Color col, size_t size)
+            : key(key), val(val), col(col), size(size), left(nullptr), right(nullptr) {}
+    };
+
     RBTree();
     size_t size(void) const;
     bool isEmpty(void) const;
@@ -16,9 +33,8 @@ public:
     int minNode(void) const;
     int maxNode(void) const;
     void print_in_order(void) const;
+    Node* getRoot() { return root; }
 private:
-    enum class Color;
-    struct Node;
     Node* root;
     bool isRed(Node* x) const ;
     size_t size(Node* x) const;
@@ -38,23 +54,6 @@ private:
     Node* minNode(Node* x) const;
     Node* maxNode(Node* x) const;
     void print_in_order(Node* x) const;
-};
-
-enum class RBTree::Color {
-    red,
-    black
-};
-
-struct RBTree::Node {
-    int key;
-    int val;
-    Node* left;
-    Node* right;
-    Color col;
-    size_t size;
-
-    Node(int key, int val, Color col, size_t size)
-        : key(key), val(val), col(col), size(size), left(nullptr), right(nullptr) {}
 };
 
 RBTree::RBTree() : root(nullptr) {}

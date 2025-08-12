@@ -7,6 +7,17 @@ using std::endl;
 
 class BST {
 public:
+    struct Node {
+        int key;
+        int val;
+        size_t size;
+        Node* left;
+        Node* right;
+
+        Node(int key, int val, size_t size)
+            : key(key), val(val), size(size), left(nullptr), right(nullptr) {}
+    };
+
     BST();
     size_t height();
     bool isEmpty(void) const;
@@ -20,8 +31,8 @@ public:
     int min(void);
     int max(void);
     void print_in_order(void) const;
+    Node* getRoot() { return root; }
 private:
-    struct Node;
     Node* root;
     size_t size(Node* x) const;
     Node* get(Node* x, int key) const;
@@ -35,17 +46,6 @@ private:
     void print_in_order(Node* x) const;
 };
 
-struct BST::Node {
-    int key;
-    int val;
-    Node* left;
-    Node* right;
-    size_t size;
-
-    Node(int key, int val, size_t size)
-        : key(key), val(val), size(size), left(nullptr), right(nullptr) {}
-};
-    
 BST::BST() : root(nullptr) {}
 
 bool BST::isEmpty(void) const {

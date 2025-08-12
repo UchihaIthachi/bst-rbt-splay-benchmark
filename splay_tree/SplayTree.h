@@ -3,6 +3,16 @@
 
 struct SplayTree {
 public:
+    struct Node {
+        int key;
+        int val;
+        Node* left;
+        Node* right;
+
+        Node(int key, int val) 
+            : key(key), val(val), left(nullptr), right(nullptr) {}
+    };
+
     SplayTree();
     bool contains(int key);
     void put(int key, int val);
@@ -10,8 +20,8 @@ public:
     size_t height(void) const;
     size_t size(void) const;
     void print_in_order(void) const;
+    Node* getRoot() { return root; }
 private:
-    struct Node;
     Node* root;
     Node* get(int key);
     Node* put(Node* x, int key, int val);
@@ -22,16 +32,6 @@ private:
     size_t height(Node* x) const;
     size_t size(Node* x) const;
     void print_in_order(Node* x) const;
-};
-
-struct SplayTree::Node {
-    int key;
-    int val;
-    Node* left;
-    Node* right;
-
-    Node(int key, int val) 
-        : key(key), val(val), left(nullptr), right(nullptr) {}
 };
 
 SplayTree::SplayTree() : root(nullptr) {}
